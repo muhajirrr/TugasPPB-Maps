@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MapsActivity" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:orientation="vertical"
+        android:background="#FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etLongitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp"
+                android:paddingLeft="16dp"
+                android:hint="Long"
+                android:layout_weight="1"
+                android:inputType="numberDecimal"
+                android:background="@null"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/etLatitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp"
+                android:paddingLeft="16dp"
+                android:hint="Lat"
+                android:layout_weight="1"
+                android:inputType="numberDecimal"
+                android:background="@null"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/etZoom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp"
+                android:paddingLeft="16dp"
+                android:hint="Zoom"
+                android:layout_weight="1"
+                android:inputType="numberDecimal"
+                android:background="@null"
+                android:textSize="18sp"/>
+
+            <ImageButton
+                android:id="@+id/btnGo"
+                android:layout_width="56dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_search_black"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/etAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp"
+                android:paddingLeft="16dp"
+                android:hint="Cari Alamat"
+                android:layout_weight="1"
+                android:background="@null"
+                android:textSize="18sp"/>
+
+            <ImageButton
+                android:id="@+id/btnSearch"
+                android:layout_width="56dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_search_black"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
