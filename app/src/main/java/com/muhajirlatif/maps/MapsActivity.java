@@ -30,6 +30,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -56,6 +57,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationManager locationManager;
     private Location currentLocation;
     private MyLocationListener locationListener;
+    private Marker currentMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         locationListener = new MyLocationListener();
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 200, 10, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 200, 1, locationListener);
 
         // Init current location
         currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -127,8 +129,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+//        mMap.setMyLocationEnabled(true);
+//        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        currentMarker = mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()))
+                .title("My Location")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), zoom));
     }
 
@@ -234,6 +240,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             currentLocation = location;
             tvLatitude.setText(String.valueOf(currentLocation.getLatitude()));
             tvLongitude.setText(String.valueOf(currentLocation.getLongitude()));
+
+            mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())));
+
+            if (currentMarker != null)
+                currentMarker.remove();
+            currentMarker = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(location.getLatitude(), location.getLongitude()))
+                    .title("My Location")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
         }
 
         @Override
